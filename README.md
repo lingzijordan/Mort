@@ -23,3 +23,4 @@ mort/scripts: ./mort_nginx.sh init
 in Browser:
 http://localhost
 
+Install node.js which is npm
