@@ -1,0 +1,20 @@
+- truncate = require('truncate')
+.datasource-datasets.jade
+	if (this.state.dataSets)
+		if (this.state.dataSets.error)
+			p.error= this.state.dataSets.error
+		else if (this.state.dataSets.data && this.state.dataSets.data.length > 0)
+			table
+				thead
+					th Index
+					th Name
+					th Description
+					th Actions
+				tbody
+					each dataset,i in this.state.dataSets.data || []
+						tr
+							td= i + 1
+							td= dataset.name
+							td(class='description')= truncate(dataset.description, 50)
+							td
+								Link(href='/datasets/' + dataset.id + '/reports/new') Create Report

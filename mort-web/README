@@ -1,0 +1,24 @@
+mort-web
+=================
+
+
+### 命令行工具
+* `gulp` 类似make，用来 dev 或 build
+* `webpack` 客户端文件打包工具
+
+# react 主要模块
+* react-router-component 浏览器路由，用于构建单页面应用，根据url来显示页面模块。
+
+### 代码文件
+* package.json 项目的依赖描述
+* node_modules/ 项目的依赖库
+* app.js 服务器端入口文件，将删除，不需要node服务器
+* server.coffee 使用expressjs做服务端路由， 将删除
+* public/ webpack 打包产生的文件 如 main.bundle.js，给单页面网页使用
+* lancher.coffee 浏览器端入口文件
+* app/ react应用
+	* app.coffee，根据浏览器的url, 决定显示哪个模块
+
+### 开发
+`gulp watch`
+`cnpm i` ＃安装依赖模块

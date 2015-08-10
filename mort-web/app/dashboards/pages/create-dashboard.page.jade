@@ -1,0 +1,26 @@
+- Form = React.createFactory(require('../../commons/ajax-form.coffee'))
+- i18n = require('../../i18n.coffee')
+- ReactSuperSelect = React.createFactory(require('react-super-select'))
+- require('react-super-select/lib/react-super-select.css')
+.create-report.page
+	span(class='error-message')= this.state.error
+	Form(action='/dashboards', method='post', ref='form', onSubmit = this.submit, onResponse = this.onResponse)
+		dl
+			dd
+				label= i18n('dashboardName')
+				input(name='name', required=true, maxLength=50)
+			dd
+				label= i18n('description')
+				textarea(name='description')
+			dd
+				label= i18n('views')
+				ReactSuperSelect(
+					placeholder = i18n('views'),
+					dataSource = this.state.views.data,
+					onChange = this.handleViewsSelected,
+					optionLabelKey = "name",
+					groupBy = 'reportName',
+					tags = true,
+					searchable = true
+				)
+		input(type='submit', value='submit')

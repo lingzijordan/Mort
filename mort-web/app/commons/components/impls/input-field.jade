@@ -1,0 +1,8 @@
+- state = this.state
+tr(key=state.key, class=state.errorMessage?'error':'')
+    td
+        label(for=state.key)= state.displayName
+    td
+        input(id=state.key, name=state.key, type=state.fieldType, defaultValue=state.defaultValue, onBlur=this.validate, ref=state.key)
+    //td
+        span(for=state.key, class='error-message')= state.errorMessage

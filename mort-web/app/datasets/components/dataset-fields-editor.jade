@@ -1,0 +1,28 @@
+thead
+	if (this.state.fields && this.state.fields.data && this.state.fields.data.fields)
+		tr
+			each field,i in this.state.fields.data.fields
+				th(key=field.name)
+					input(type='hidden', name="fields.#{i}.fieldName", value=field.name)
+					input(type='hidden', name="fields.#{i}.dataClassName", value=field.dataClassName)
+					input(type='hidden', name="fields.#{i}.length", value=field.length)
+					input(type='hidden', name="fields.#{i}.scale", value=field.scale)
+
+					span(style={display:'block'}).alias-name= this.state.fields.nameToAliasName[field.name] || field.name
+					input.alias-name(name="fields.#{i}.aliasName",placeholder=field.name,valueLink=this.linkState("fields.nameToAliasName."+field.name),onBlur=this.submit)
+					
+					if (this.state.duplicateValues && this.state.duplicateValues[this.state.fields.nameToAliasName[field.name]])
+						.error aliasName must be unique
+					
+					select(name="fields.#{i}.fieldType", valueLink=this.linkState("fields.data.fields.#{i}.fieldType"))
+						each option in this.getFieldTypes(field)
+							option(value=option)= i18n(option)
+	
+	else if (this.state.fields && this.state.fields.error)
+		tr
+			th(colSpan=this.props.preview.fields.length).error= this.state.fields.error
+					
+	else
+		tr
+			each field, i in this.props.preview.fields || []
+				th(key=field)= field

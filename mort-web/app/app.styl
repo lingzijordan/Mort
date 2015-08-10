@@ -1,0 +1,79 @@
+header_height = 64px
+body
+	overflow-x hidden
+	margin 0
+	padding 0
+	font 11px/1.5 Monaco, Courier, monospace
+.app
+	width 100vw
+	height 100vh
+	padding-top header_height
+	box-sizing border-box
+	background #eef2f3
+	color #2c3e50
+
+.router
+	relative top left
+	width 100%
+	height 100%
+	height calc(100vh - 64px)
+	overflow hidden
+	transition all .4s
+.error-message
+	color #f00
+.clear-fix
+	overflow: auto
+
+.mask
+	position fixed
+	top header_height
+	left 0
+	width 100%
+	width 100vw
+	height 100%
+	height 100vh
+	height calc(100vh - header_height)
+	background rgba(255,255,255,0)
+	pointer-events none
+	z-index 1000
+	&.show
+		background #fffce1
+	&.full
+		top 0 !important
+		left 0 !important
+		width 100% !important
+		width 100vw !important
+		height 100% !important
+		height 100vh !important
+		height calc(100vh - header_height) !important
+	
+	&.to91
+		transform scale(.91)
+		
+.page-enter
+	position: absolute !important
+	width 100%
+	opacity 0
+	// transition-duration: .3s;
+	// transition-property: transform, opacity;
+	// transition-timing-function: ease-out;
+	// transform: translate3d(0,100%,0);
+	z-index: 10000;
+	transition all .4s ease
+.page-enter.page-enter-active
+	//transform: translate3d(0,0,0);
+	opacity 1
+.page-leave 
+	position: absolute !important
+	width 100%
+	transition all .4s ease
+
+	// transition-duration: .3s;
+	// transition-property: transform, opacity;
+	// transition-timing-function: ease-out;
+	// transform: translate3d(0,0,0);
+	opacity: 1;
+.page-leave.page-leave-active
+	//transform: translate3d(0,-15%,0);
+	opacity: 0;
+		

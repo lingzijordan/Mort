@@ -1,0 +1,25 @@
+- Link = React.createFactory(require('react-router-component').Link)
+
+.report.page.jade
+	if this.state.report && this.state.report.data
+		div
+			dl
+				dt description
+				dd= this.state.report.data.report.description
+				dt createdAt
+				dd= this.state.report.data.report.createdAt
+				dt createdBy
+				dd= this.state.report.data.report.createdBy
+				dt updateAt
+				dd= this.state.report.data.report.updatedAt
+				dt updateBy
+				dd= this.state.report.data.report.updatedBy
+				dt dataset
+				dd
+					Link(href='/datasets/' + this.state.report.data.report.dataSetId)= this.state.report.data.report.dataSetId
+			ol.views-entry
+				each view in this.state.report.data.views || []
+					li(key=view.id)
+						Link(href='/views/'+view.id)= view.name
+	else if this.state.report && this.state.report.error
+		.error= this.state.report.error

@@ -1,0 +1,6 @@
+- fields = this.state.fields
+
+div
+    each field in fields
+        - Field = field.build().render
+        Field

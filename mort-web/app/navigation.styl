@@ -1,0 +1,115 @@
+header_height = 64px
+.header
+	absolute top 0
+	width 100%
+	height header_height
+	white-space nowrap
+	background #fff
+	a
+	h1
+	h2
+		color #141416
+		display inline-block
+		padding 0 1rem
+		margin 0
+		line-height header_height
+		cursor pointer
+		&:hover
+			color steelblue
+		h2
+			padding 0
+	h2
+		display inline-table
+		line-height header_height
+		margin 0
+		&:before
+			content '>'
+			font-weight bold
+			color #888
+			pointer-event none
+			padding-right 1rem
+	.path-enter
+		opacity 0
+		transform: translate(-50px, 0)
+		transition all .1s ease-in
+	.path-enter.path-enter-active
+		opacity 1
+		transform: translate(0, 0)
+	.path-leave
+		opacity 1
+		transform: translate(0, 0)
+		transition all .1s ease-in
+	.path-leave.path-leave-active
+		opacity 0
+		transform: translate(-50px, 0)
+		
+.left-side
+	position fixed
+	width 100vw
+	top 64px
+	bottom 0
+	left 0
+	z-index 100
+	overflow hidden
+	transform: translate3d(-250px, 0, 0)
+	transition: all 0.6s
+	
+
+	.menu
+		width: 425px
+		padding: 0 0 2em 0;
+		overflow-y: auto;
+		height: 100%;
+		position: relative;
+		z-index: 100;
+		
+	ul
+		list-style none
+		padding 0 1em
+		margin 0
+		display flex
+		flex-direction column
+		justify-content space-around
+		height 100%
+		max-height 400px
+		li
+			margin: 0
+			transform: translate3d(-150px, 0, 0);
+			transition: transform 0.3s;
+			a
+				display: block;
+				color #B24E51
+				text-decoration none
+				&:hover
+					color #fff
+	
+	.morph-shape
+		position: absolute;
+		height: 100%;
+		top: 0;
+		left: 50px;
+
+		svg path
+			stroke:#5f656f ;
+			stroke-width: 5px;
+			transition opacity .4s
+.navigation
+	&:not(.open) .left-side
+		pointer-events none
+	&.open
+		.left-side
+			transform translate3d(0,0,0)
+		.header
+			h2:first-of-type
+				margin-left 6em
+		&+.router
+			//opacity .1
+			pointer-events none
+			transform scale(.5) translate3d(25%,0,0)
+	&.anim .left-side
+		ul
+			li
+				transform: translate3d(0, 0, 0)
+				for num in (1..6)
+					&:nth-child({num})
+						transition-delay num * .1s + .3s

@@ -1,0 +1,25 @@
+- require('../../editor.styl')
+
+- Form = React.createFactory(require('../../commons/ajax-form.coffee'))
+- Link = React.createFactory(Router.Link)
+- DatasetPreview = React.createFactory(require('../components/dataset-preview.coffee'))
+
+.dataset-editor.editor.jade
+	Form(action='/data-sets', method='post', onSubmit=this.onSubmit, onResponse=this.onResponse)
+
+		input(type='hidden', name='dataSourceId', value=+this.props.dataSourceId, required=true)
+		dl
+			dd
+				label name
+				input(name='name',placeholder='name',valueLink=this.linkState('name'), required=true)
+			dd
+				label description
+				input(name='description',placeholder='description',valueLink=this.linkState('description'))
+			dd
+				label sql
+				input(name='sql', placeholder='select * from ..', valueLink=this.linkState('sql'), onKeyUp=this.sqlOnKeyUp,class=this.state.sql2ast.status?'':'error')
+
+			dd
+				input(type='submit', value='create')
+
+		DatasetPreview(dataSource=this.props.dataSource, sql=this.state.sql)

@@ -1,0 +1,52 @@
+- require('./create-view.page.styl')
+- TimeoutTransitionGroup = React.createFactory(require('timeout-transition-group'))
+- Form = React.createFactory(require('../../commons/ajax-form.coffee'))
+- Link = React.createFactory(require('react-router-component').Link)
+- Chart = React.createFactory(require ('../../charts/index.coffee'))
+
+.create-view.page
+	.fields-wrap
+		if this.state.fields.data
+			each fieldType in ['metrics', 'categories', 'timeCategories']
+				div(class=fieldType+'-wrap', key=fieldType)
+					if this.state.fields.data[fieldType] && this.state.fields.data[fieldType].length
+						dl(class=fieldType)
+							dt= fieldType
+							each item in this.state.fields.data[fieldType]
+								- clazz = this.state.dropFields_by_codeName[item.codeName] != null ? item.fieldType + ' active': item.fieldType
+								dd.field(key=item.codeName, draggable=true, class=clazz, onDragStart=this.onDragStart(item))= item.aliasName
+									if fieldType == 'metrics' && item.id > 0
+										each operation in ['sum', 'avg', 'max', 'min', 'count']
+											- clazz = this.state.dropFields_by_codeName[item.codeName] != null && this.state.dropFields_by_codeName[item.codeName].indexOf(operation) > -1 ? 'active': ''
+											.operation(key=operation, class=clazz, draggable=true,onDragStart=this.onDragStart(item,operation))=operation
+
+	.view-builder(droppable=true, onDrop=this.onDrop, onDragOver=this.enableDrop)
+		Form(action='/views', method='post', onSubmit=this.submit, onResponse=this.onResponse)
+			input(name='reportId', type='hidden', value=this.props.id)
+			input(name='viewType', type='hidden', value='BarChart')
+			input(name='name', placeholder='name', required=true)
+			input(name='description', placeholder='description')
+			input.create-view-submit(type='submit', value='submit')
+		.error=this.state.aggregate.error
+		ul.drop-fields.drop-categories
+			TimeoutTransitionGroup(transitionName="drop-field", enterTimeout=100, leaveTimeout=100)
+				each item in this.state.dropCategories
+					li.field(key=item.codeName + item.operation)
+						span= item.operation ? item.operation+"("+item.aliasName+")" : item.aliasName
+						span.btn-remove(onClick=this.remove(item)) x
+		
+		ul.drop-fields.drop-metrics
+			TimeoutTransitionGroup(transitionName="drop-field", enterTimeout=100, leaveTimeout=100)
+				each item, i in this.state.dropMetrics
+					li.field(key=item.operation+item.aliasName+i)
+						span= item.operation ? item.operation+"("+item.aliasName+")" : item.aliasName
+						span.btn-remove(onClick=this.remove(item)) x
+						
+						Chart(result=this.state.aggregate.data, field=item)
+							
+				if !this.state.dropMetrics.length
+					if this.state.aggregate.data && this.state.aggregate.data.fields
+						- item = this.state.aggregate.data.fields[this.state.aggregate.data.fields.length - 1]
+						li.field(key=0)
+							span= item.operation ? item.operation+"("+item.aliasName+")" : item.aliasName
+							Chart(ref='chart'+item.operation+item.aliasName, result=this.state.aggregate.data, field=item)

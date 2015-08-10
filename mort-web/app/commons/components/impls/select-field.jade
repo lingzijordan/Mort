@@ -1,0 +1,9 @@
+- state = this.state
+
+tr(key=state.key)
+    td
+        label(for=state.key)= state.displayName
+    td(style={textAlign: 'left'})
+        select(id=state.key, name=state.key, value=state.defaultValue, onChange=this.handleChange)
+            each option in state.options
+                option(value=option.value)= option.displayName

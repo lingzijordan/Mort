@@ -1,0 +1,8 @@
+- require('./chart-with-labels.styl')
+.chart-with-labels
+	.chart-labels
+		dl
+			each item in this.state.labels || []
+				dd(key=item.label, style={background:item.color})=item.label
+	.chart-content-wrap
+		.chart-content(ref='content')

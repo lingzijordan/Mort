@@ -1,0 +1,39 @@
+.chart-with-labels
+	relative top left
+	width 100%
+	.chart-content-wrap
+		relative top left
+	.chart-content
+		width 100%
+		
+	svg
+		overflow hidden
+		absolute top left
+		width 100%
+		height 100%
+	.node
+	.chunk
+	.item_with_text
+		.metric
+			opacity 0
+			transition all .4s
+		&:hover
+			.metric
+				opacity 1
+				
+		&:hover:not(.line)
+			path
+				stroke #aaa
+				stroke-width 4px
+	.line
+		pointer-events none
+	.chart-labels
+		dl
+			display flex
+			justify-content space-around
+		dd
+			margin 0
+			flex-grow: 1
+			padding .2em .4em
+			color #fff
+			text-align center

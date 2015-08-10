@@ -1,0 +1,11 @@
+- require('./view.page.styl')
+.view.page.jade
+	- Chart = React.createFactory(require ('../../charts/index.coffee'))
+	if this.state.view && this.state.view.data && this.state.view.data.data
+		- view = this.state.view.data.view
+		- more = JSON.parse(view.description)
+		each field in this.state.view.data.data.fields
+			if field.fieldType == 'Metric'
+				- refName = "chart" + field.operation + field.aliasName
+				- viewType = more[refName]
+				Chart(result=this.state.view.data.data, field=field, viewType=viewType, view=this.state.view.data.view)

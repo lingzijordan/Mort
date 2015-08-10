@@ -1,0 +1,26 @@
+- truncate = require('truncate')
+.reports-page-page.jade
+	if this.state.reports
+		if this.state.reports.error
+			p.error= this.state.reports.error
+		else if (this.state.reports.data && this.state.reports.data.length > 0)
+			table
+				thead
+					th 序号
+					th 报表名
+					th 描述
+					th 创建者
+					th 创建时间
+					th(colSpan=2) 操作
+				tbody
+					each report,i in this.state.reports.data || []
+						tr
+							td= i + 1
+							td= report.name
+							td(class='description')= truncate(report.description, 50)
+							td= report.createdBy
+							td= report.createdAt
+							td
+								Link(href='/reports/' + report.id + '/views/new') Create View
+							td
+								Link(href='/reports/' + report.id) View Report

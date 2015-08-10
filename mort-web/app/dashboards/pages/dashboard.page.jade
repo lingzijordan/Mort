@@ -1,0 +1,62 @@
+- i18n = require('../../i18n.coffee')
+- Link = React.createFactory(Router.Link)
+- data = this.state.dashboardDetail.data
+//div= JSON.stringify(this.state)
+
+div
+    div
+        if(this.state.dashboardDetail.data)
+                table
+                    thead
+                        th ID
+                        th Name
+                        th description
+                        th created_at
+                        th updated_at
+                        th created_by
+                        th updated_by
+
+                    tbody
+                        td= data.id
+                        td= data.name
+                        td= data.description
+                        td= data.createdAt
+                        td= data.updatedAt
+                        td= data.createdBy
+                        td= data.updatedBy
+
+    div
+        if(data)
+            if(data.error)
+                p.error= this.state.dashboardDetail.error
+            else if(data.views.length > 0)
+                table
+                    thead
+                        th ID
+                        th Name
+                        th Description
+                        th ViewType
+                        th Sql
+                        th createdAt
+                        th updatedAt
+                        th createdBy
+                        th updatedBy
+                        th view
+
+                    tbody
+                        each view in data.views || []
+                            tr
+                                td= view.id
+                                td= view.name
+                                td= view.desc
+                                td= view.viewType
+                                td= view.sql
+                                td= view.createdAt
+                                td= view.updatedAt
+                                td= view.createdBy
+                                td= view.updatedBy
+                                td
+                                    Link(href='/views/'+view.id)= view.name
+
+
+

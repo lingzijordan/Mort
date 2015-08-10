@@ -1,0 +1,11 @@
+- Link = React.createFactory(require('react-router-component').Link)
+- Item = React.createFactory(require('./datasource-item.coffee'))
+.datasources.jade
+	if this.state.datasources
+		if this.state.datasources.error
+			div Loading datasources:
+				.error!= this.state.datasources.error
+		else
+			ul.datasources
+				each datasource in this.state.datasources.data || []
+					Item(datasource=datasource, key=datasource.dataSourceId)

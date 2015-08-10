@@ -1,0 +1,20 @@
+- require('./perspective.styl')
+.perspective.jade
+	if this.state
+		table
+			thead
+				if this.state.categories.horizontal
+					tr
+						th= this.state.categories.horizontal.aliasName
+						
+						each col in this.state.categories.horizontal.domain || []
+							th(key=col)= col
+				if this.state.categories.vertical
+					tr
+						th= this.state.categories.vertical.aliasName
+			tbody
+				each row,i in this.state.metrics[0].grid
+					tr(key=i)
+						th= this.state.categories.vertical ? this.state.categories.vertical.domain[i] : (this.props.metrics[0].operation + '(' + this.props.metrics[0].aliasName + ')')
+						each col, j in row
+							td(key=j)= col[this.state.metrics[0].index]

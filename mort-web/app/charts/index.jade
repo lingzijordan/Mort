@@ -1,0 +1,12 @@
+- require('./index.styl')
+- viewTypes = require('./viewTypes.json')
+
+.chart.jade(draggable=true, onDragStart=this.onDragStart)
+	ul.view-types
+		each viewType in viewTypes
+			li(key=viewType, onClick=this.setState.bind(this,{viewType:viewType},null))= viewType
+	
+	if (this.state.root)
+		- View = React.createFactory(require('./'+this.state.viewType.toLowerCase()+'.coffee'))
+		div(draggable=true, onDragStart=this.stopDrag)
+			View(categories=this.state.categories, metrics=this.state.metrics, field=this.props.field, viewType=this.state.viewType, root=this.state.root, result=this.state.result)

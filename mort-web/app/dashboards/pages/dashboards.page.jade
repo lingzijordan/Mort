@@ -1,0 +1,37 @@
+- i18n = require('../../i18n.coffee')
+- Link = React.createFactory(Router.Link)
+- dashboards = this.state.dashboards
+div
+    div
+        if (dashboards)
+            if (dashboards.error)
+                p.error = this.state.dashboards.error
+            else if (dashboards.data && dashboards.data.length > 0)
+                table
+                    thead
+                        th ID
+                        th Name
+                        th description
+                        th created_at
+                        th updated_at
+                        th created_by
+                        th updated_by
+                        th detail
+                    tbody
+                        each dashboard,index in dashboards.data || []
+                            tr
+                                td= dashboard.id
+                                td= dashboard.name
+                                td= dashboard.description
+                                td= dashboard.created_at
+                                td= dashboard.updated_at
+                                td= dashboard.created_by
+                                td= dashboard.updated_by
+                                td
+                                    Link(href='/dashboards/'+dashboard.id) detail
+    Link(href='/dashboards/new') addDashBoard
+
+
+
+
+

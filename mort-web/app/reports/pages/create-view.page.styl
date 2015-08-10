@@ -1,0 +1,90 @@
+.create-view.page
+	width 100%
+	height 100%
+
+.fields-wrap
+	width 250px
+	height 100%
+	overflow auto
+	float left
+	background #f8f8f8
+	color #333
+	.field
+		cursor pointer
+		font-weight bold
+		font-size 1.2em
+		user-select none
+		
+		&.active .operation:not(.active):not(:hover)
+		&:hover .operation:not(:hover):not(.active)
+			color #333
+			
+		&:hover
+		.operation:hover
+		&.active
+			color orange
+			
+	.operation
+		padding 0 0 0 1em
+	dt
+		font-size 1.6em
+		color #aaa
+	dd
+		margin-left 1.4em
+		
+.view-builder
+	background #fff
+	color #333
+	height 100%
+	max-width 600px
+	overflow auto
+	box-shadow 8px 0px 16px rgba(0,0,0,.3)
+	
+.drop-fields
+	display table
+	li
+		relative top left
+		cursor default
+		.btn-remove
+			absolute top left -2.4em
+			opacity 0
+			cursor pointer
+			transition all .4s
+			padding 0 .4em
+			&:hover
+				color steelblue
+				
+		&:hover
+			list-style none
+			.btn-remove
+				opacity 1
+				
+	.drop-field-enter
+		opacity 0
+		transform: translate(-50px, 0)
+		transition all .1s ease-in
+	.drop-field-enter.drop-field-enter-active
+		opacity 1
+		transform: translate(0, 0)
+	.drop-field-leave
+		opacity 1
+		transition all .1s ease-in
+	.drop-field-leave.drop-field-leave-active
+		opacity 0
+		margin-top -1em
+.drop-metrics
+	width 100%
+	box-sizing border-box
+	.field
+		width 100%	
+.create-view-submit
+	background transparent
+	color steelblue
+	border 1px solid steelblue
+	border-radius 2px
+	padding .2em .4em
+	cursor pointer
+	&:hover
+		color #fff
+		background steelblue
+	

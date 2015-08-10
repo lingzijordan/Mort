@@ -1,0 +1,21 @@
+- Link = React.createFactory(require('react-router-component').Link)
+- i18n = require('./i18n.coffee')
+- TimeoutTransitionGroup = React.createFactory(require('timeout-transition-group'))
+.navigation
+	.header
+		h1(onClick=this.toggle) Mort
+		TimeoutTransitionGroup(transitionName="path", enterTimeout=100, leaveTimeout=100)
+			each path, i in this.state.pathes
+				if path.path
+					Link(href=path.path, globalHash=true, key=i)
+						h2= i18n(path.name)
+				else
+					Link(key=i, style={pointerEvents:'none'})
+						h2(key=i)= i18n(path.name)
+
+	.left-side(ref='left_side',onClick=this.toggle)
+		.menu
+			ul.entries
+				each path in ['datasources', 'datasets', 'reports', 'dashboards', 'users', 'domain']
+					li(key=path)
+						Link(href='/'+path,globalHash=true)=  path

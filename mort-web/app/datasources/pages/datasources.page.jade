@@ -1,0 +1,18 @@
+- require('../../page-with-add-frame.styl')
+
+- i18n = require('../../i18n.coffee')
+.datasources.page.jade.page-with-add-frame
+	.clear-fix
+
+	- Datasources = React.createFactory(require('../components/datasources.coffee'))
+	Datasources
+
+	input#toggle-add-checkbox.toggle-add-checkbox(type='checkbox',ref='show_add_frame',valueLink=this.linkState('show_add_frame'))
+	.add-frame
+		- Add = React.createFactory(require('../components/datasource-editor.coffee'))
+		Add
+
+	.page-bottom
+		label.toggle-add-label(for='toggle-add-checkbox')
+			.add-icon +
+			span= i18n("datasource")

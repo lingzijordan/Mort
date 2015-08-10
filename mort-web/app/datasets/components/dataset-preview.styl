@@ -1,0 +1,43 @@
+.dataset-preview.jade
+	width 100%
+	text-align center
+	.dataset-preview
+		width 100%
+		overflow auto
+		border 1px solid steelblue
+
+	table
+		display inline-table
+		color #444
+		background #fcfbfa
+	thead
+		outline 1px solid steelblue
+		text-align right
+	
+	th
+		text-align center
+		font-weight normal
+		font-size 1em
+		padding 0 .4em
+		relative top left
+		input.alias-name
+			absolute top left
+			width 100%
+		select
+			font-size .2rem
+	td
+		font-size .2rem
+		line-height 2
+	tr:nth-child(odd)
+		background #fff
+	
+
+	.error
+		color red
+	
+	select
+		width auto
+	
+	input
+		text-align center
+		display table

@@ -1,0 +1,23 @@
+- require('../../page-with-add-frame.styl')
+
+.datasource.page.page-with-add-frame
+	//table
+		tr
+			td
+				Link(href='/datasources/' + this.props.id + '/datasets/new') create dataset
+			td
+				Link(href='/datasources/' + this.props.id + '/datasets') All Datasets
+	.clear-fix
+	
+	- Datasets = React.createFactory(require('../../datasets/components/datasets.coffee'))
+	Datasets(dataSourceId=this.props.id)
+
+	input#toggle-add-checkbox.toggle-add-checkbox(type='checkbox',ref='show_add_frame',valueLink=this.linkState('show_add_frame'))
+	- Add = React.createFactory(require('../../datasets/components/dataset-editor.coffee'))
+	.add-frame
+		if this.state.datasource
+			Add(dataSourceId=this.props.id, dataSource=this.state.datasource.data)
+	.page-bottom
+		label.toggle-add-label(for='toggle-add-checkbox')
+			.add-icon +
+			span dataset

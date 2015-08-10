@@ -1,0 +1,8 @@
+- Link = React.createFactory(require('react-router-component').Link)
+- i18n = require('./i18n.coffee')
+
+.main
+	ul.entries
+		each path in ['datasources', 'datasets', 'reports', 'dashboards', 'users', 'domain']
+			li(key=path)
+				Link(href='/'+path)= i18n(path)

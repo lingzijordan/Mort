@@ -1,0 +1,19 @@
+- FieldSetComponent = require('../../commons/components/field-set-component.coffee')
+- Button = require('../../commons/components/button-component.coffee')
+- Form = React.createFactory(require('../../commons/ajax-form.coffee'))
+.datasource-editor
+    - self = this
+    span(id='globalError', class='error-message')= self.state.createErrorMessage
+    span(id='checkConnectionMessage', class='error-message')= self.state.checkConnectionMessage
+    Form(action='/data-sources', method='post', onSubmit=this.onSubmit)
+        table
+            tbody
+                FieldSetComponent(fields=self.state.basicFields,ref='basicFields')
+        table(style={'display': this.shouldShow('RDB')})
+            tbody
+                FieldSetComponent(fields=self.state.databaseFields,ref='rdbFields')
+
+    // - CheckConnectionButton = Button(this.checkConnection, 'check', 'check')
+    button(onClick=this.checkConnection) check
+    - SubmitButton = Button(this.submit)
+    SubmitButton

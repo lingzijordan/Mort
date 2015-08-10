@@ -1,0 +1,16 @@
+- require('./dataset-preview.styl')
+.dataset-preview.jade
+	.btn(onClick=this.preview) preview
+	.dataset-preview
+		if this.state.preview
+			if this.state.preview.error
+				p.error= this.state.preview.error
+			else if (this.state.preview.data)
+				table
+					- DatasetFieldsEditor = React.createFactory(require('./dataset-fields-editor.coffee'))
+					DatasetFieldsEditor(ref='fields', preview=this.state.preview.data, dataSource=this.props.dataSource, sql=this.props.sql)
+
+					each row,i in this.state.preview.data.rows || []
+						tr(key=i)
+							each col,j in row
+								td(key=j)= col

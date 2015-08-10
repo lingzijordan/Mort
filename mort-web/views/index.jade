@@ -1,0 +1,13 @@
+doctype html
+
+html
+	head
+		title big eye
+		meta(name="viewport",content="width=device-width, initial-scale=1, user-scalable=no")
+	body
+		#app
+		if (process.env.PORT == 80)
+			script(src='/public/main.bundle.js')
+		else
+			//script(src='http://localhost:8000/webpack-dev-server.js')
+			script(src='http://localhost:8000/main.bundle.js')

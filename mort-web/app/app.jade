@@ -1,0 +1,27 @@
+- Router = require('react-router-component')
+- Locations = React.createFactory(Router.Locations)
+- Location = React.createFactory(Router.Location)
+- NotFound = React.createFactory(Router.NotFound)
+- AnimatedLocations = React.createFactory(require('react-router-component-transition-x'))
+.app
+	- Navigation = React.createFactory(require('./navigation.coffee'))
+	Navigation
+
+	AnimatedLocations.router(hash=true,transitionName='page')
+		Location(path='/', handler= require('./index.coffee'))
+		Location(path='/datasources', handler= require('./datasources/pages/datasources.page.coffee'))
+		Location(path='/datasources/:id', handler= require('./datasources/pages/datasource.page.coffee'))
+		Location(path='/datasources/:dataSourceId/datasets', handler= require('./datasets/pages/datasource-datasets.page.coffee'))
+		Location(path='/datasets/:dataSetId/reports/new', handler= require('./reports/pages/create-report.page.coffee'))
+		Location(path='/reports', handler=require('./reports/pages/reports.page.coffee'))
+		Location(path='/reports/:id', handler= require('./reports/pages/report.page.coffee'))
+		Location(path='/reports/:id/views/:new', handler= require('./reports/pages/create-view.page.coffee'))
+		Location(path='/reports/:id/views/new/:viewType', handler= require('./reports/pages/create-view.page.coffee'))
+		Location(path='/views/:id', handler= require('./reports/pages/view.page.coffee'))
+		Location(path='/datasets', handler=require('./datasets/pages/datasets.page.coffee'))
+		Location(path='/dashboards/new', handler=require('./dashboards/pages/create-dashboard.page.coffee'))
+		Location(path="/dashboards",handler=require('./dashboards/pages/dashboards.page.coffee'))
+		Location(path="/dashboards/:id",handler=require('./dashboards/pages/dashboard.page.coffee'))
+		NotFound(handler=require('./404.coffee'))
+
+	//.mask(ref='mask')
